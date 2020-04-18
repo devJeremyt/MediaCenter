@@ -26,7 +26,7 @@ function loadVideos(){
                               console.log(err);
                           }
                           if(!result){
-                              let proc = createScreenshot(absPath, vidFile);
+                              createScreenshot(absPath, vidFile);
                               let title = vidFile.replace('.mp4', '').substring(0,20);
                               let type = 'mp4';
                               let thumbnail = '/photos/' + vidFile.substring(0, vidFile.lastIndexOf('.')) + '.png';
