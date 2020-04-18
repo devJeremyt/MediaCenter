@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>Media Center</title>
+    <script type="text/javascript" src="scroll.js"></script>
+</head>
+<body>
+  <div class="header"><h1>Welcome to the Trimble Family Media Center</h1></div>
+  
+<% categories.forEach((category)=>{ %>
+    <h4><%=category.name%></h4>
+    <div class="row" id="<%=category.id%>">
+        <span class="left handle" id="backButton"onclick="moveBackward(`<%=category.id%>`)">‹</span>
+        <div class="video-selection">
+            <% for(let i = 0; i <= category.vidList.length; i++){ %>
+                <% if(category.vidList[i] != undefined){ %>
+                    <% let video = category.vidList[i]; %>
+                    <div class="card<%if(i>2){%><%=' hidden-card'%><%}%>">
+                        <a class="flex-centered" href="/watch/<%= video._id %>">
+                            <img class="responsize-resize" src="<%= video.thumbnail %>" alt="">
+                        </a>
+                        <h4 style="width: 225px;" class="flex-centered"><%=video.title%></h4>
+                    </div>
+                <% } %> 
+              <% } %>
+
+        </div>
+      <span class="right handle" id="forward-button" onclick="moveForward(`<%=category.id%>`)">›</span>
+      </div>
+  <% }); %>
+
+  <div class="footer" id="footer"></div>
+<script type="text/javascript">
+    var categories = <%-JSON.stringify(categories); %>
+</script>
+
+</body>
+</html>
