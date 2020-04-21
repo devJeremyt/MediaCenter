@@ -11,3 +11,15 @@ window.addEventListener('keydown', event =>{
         }
 });
 
+vid.addEventListener('ended', ()=>{
+    const http = new XMLHttpRequest();
+    const nextURL = window.location.pathname.replace('watch', 'next')
+    http.open("GET", nextURL);
+    http.send()
+    
+    http.onreadystatechange =(e) =>{
+        console.log(http.responseText);
+        vid.src = http.responseText;
+    }
+})
+

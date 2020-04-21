@@ -78,6 +78,19 @@ app.get('/new', (req,res)=>{
 	res.render('new');
 });
 
+//Gets next video and redirects to watch
+app.get('/next/:id', (req, res)=>{
+	Video.findById(req.params.id, (err, foundVideo)=>{
+		currentCat = cats.find(data => (data.name == foundVideo.category));
+		currentVid = currentCat.vidList.filter(data => (data.id == foundVideo.id))[0];
+		currentIndex = currentCat.vidList.indexOf(currentVid);
+		nextVid = currentCat.vidList[currentIndex + 1];
+		console.log(nextVid)
+		res.send(nextVid.absPath);
+	});
+})
+
 app.listen(process.env.PORT, ()=>{
 	console.log('Server is running');
 });
+
