@@ -19,9 +19,11 @@
             <% for(let i = 0; i <= category.vidList.length; i++){ %>
                 <% if(category.vidList[i] != undefined){ %>
                     <% let video = category.vidList[i]; %>
-                    <div class="card<%if(i>2){%><%=' hidden-card'%><%}%>">
+                    <div class="card">
                         <a class="flex-centered" href="/watch/<%= video._id %>">
                             <img class="responsize-resize" src="<%= video.thumbnail %>" alt="">
+                            <button class="play-method resumeBtn">Resume</button>
+                            <button class="play-method beginBtn">Beginning</button>
                         </a>
                         <h4 style="width: 225px;" class="flex-centered"><%=video.title%></h4>
                     </div>
@@ -35,8 +37,8 @@
 
   <div class="footer" id="footer"></div>
 <script type="text/javascript">
-    var categories = <%-JSON.stringify(categories); %>
-</script>
+    var categories = JSON.stringify(categories);
+    </script>
 
 </body>
 </html>
