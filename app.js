@@ -107,8 +107,6 @@ app.put('/watch/:id', jsonParser, (req, res)=>{
 	Video.findByIdAndUpdate(req.params.id,{currentTime: req.body.currentTime}, (err, foundVideo)=>{
 		if(err){
 			console.log(err);
-		}else{
-			console.log(req.body)
 		}
 	})
 });
