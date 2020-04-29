@@ -8,6 +8,7 @@ const Video = require('./models/video');
 const loadVideos = require('./scripts/loadVideos');
 const categories = require('./models/categories');
 var cats = [];
+const jsonParser = bodyParser.json();
 
 //App setup
 app.use(express.static('Public'));
@@ -15,11 +16,12 @@ app.use(express.static(__dirname + '/Videos'));
 app.use(express.static(__dirname + '/scripts'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
+
 //Loads local environment variables
 require('dotenv').config();
 //Setups Database
 var dburl = process.env.DATABASEURL;
-mongoose.connect(dburl || "mongodb://localhost:27017/MediaCenter", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dburl || "mongodb://localhost:27017/MediaCenter", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 //Link Video directory
 var vidDir = process.env.MAINDIR + process.env.VIDEOSPATH;
@@ -67,9 +69,14 @@ app.post('/', (req, res)=>{
 });
 
 //Opens Player for the selected video
-app.get('/watch/:id', (req,res)=>{
+app.get('/watch/:id?', (req,res)=>{
 	Video.findById(req.params.id, (err, foundVideo)=>{
-		res.render('watch', {video : foundVideo});
+		console.log(req.query)
+		if(req.query.playmethod == "resume"){
+			res.render('watch', {video : foundVideo, playmethod: 'resume'});
+		} else{
+			res.render('watch', {video : foundVideo, playmethod:"beginning"});
+		}
 	});
 });
 
@@ -89,6 +96,17 @@ app.get('/next/:id', (req, res)=>{
 		res.send(nextVid.absPath);
 	});
 })
+
+//Sets the currentTime of the video
+app.put('/watch/:id', jsonParser, (req, res)=>{
+	Video.findByIdAndUpdate(req.params.id,{currentTime: req.body.currentTime}, (err, foundVideo)=>{
+		if(err){
+			console.log(err);
+		}else{
+			console.log(req.body)
+		}
+	})
+});
 
 app.listen(process.env.PORT, ()=>{
 	console.log('Server is running');

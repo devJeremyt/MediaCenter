@@ -5,7 +5,8 @@ let videoSchema = new mongoose.Schema({
     title: String,
     type: String,
     thumbnail: String,
-    category: String
+    category: String,
+    currentTime: Number
 });
 
 module.exports = mongoose.model('Video', videoSchema);

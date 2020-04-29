@@ -31,7 +31,7 @@ function loadVideos(){
                               let type = 'mp4';
                               let thumbnail = '/photos/' + vidFile.substring(0, vidFile.lastIndexOf('.')) + '.png';
 
-                              let video = {absPath: absPath, title:title, type:type, thumbnail:thumbnail, category:category};
+                              let video = {absPath: absPath, title:title, type:type, thumbnail:thumbnail, category:category, currentTime:0};
 
                               Video.create(video, (err, video)=>{
                                 if(err){
@@ -54,7 +54,7 @@ function loadVideos(){
                         let thumbnail = '/photos/thumbnailPlaceholder.png'
                         let category = "misc"
                     
-                        let video = {absPath: absPath, title:title, type:type, thumbnail:thumbnail, category: category}
+                        let video = {absPath: absPath, title:title, type:type, thumbnail:thumbnail, category: category, currentTime:0}
                     
                         Video.create(video, (err, video)=>{
                             if(err){
