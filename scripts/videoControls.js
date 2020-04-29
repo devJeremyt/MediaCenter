@@ -19,7 +19,6 @@ vid.addEventListener('ended', ()=>{
     http.send()
     
     http.onreadystatechange =(e) =>{
-        console.log(http.responseText);
         vid.src = http.responseText;
     }
 });

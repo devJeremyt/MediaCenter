@@ -71,7 +71,6 @@ app.post('/', (req, res)=>{
 //Opens Player for the selected video
 app.get('/watch/:id?', (req,res)=>{
 	Video.findById(req.params.id, (err, foundVideo)=>{
-		console.log(req.query)
 		if(req.query.playmethod == "resume"){
 			res.render('watch', {video : foundVideo, playmethod: 'resume'});
 		} else{
@@ -93,7 +92,12 @@ app.get('/next/:id', (req, res)=>{
 		currentIndex = currentCat.vidList.indexOf(currentVid);
 		nextVid = currentCat.vidList[currentIndex + 1];
 		console.log(nextVid)
-		res.send(nextVid.absPath);
+		if(nextVid != undefined){
+			res.send(nextVid.absPath);
+		} else{
+			res.send(currentVid.absPath);
+		}
+		
 	});
 })
 
