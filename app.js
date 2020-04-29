@@ -94,8 +94,9 @@ app.get('/next/:id', (req, res)=>{
 		console.log(nextVid)
 		if(nextVid != undefined){
 			res.send(nextVid.absPath);
-		} else{
-			res.send(currentVid.absPath);
+		}else{
+			res.render('watch', {video : foundVideo});
+
 		}
 		
 	});
