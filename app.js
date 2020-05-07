@@ -93,7 +93,8 @@ app.get('/next/:id', (req, res)=>{
 		nextVid = currentCat.vidList[currentIndex + 1];
 		console.log(nextVid)
 		if(nextVid != undefined){
-			res.send(nextVid.absPath);
+			// res.send(nextVid.absPath)
+			res.json(nextVid);
 		}else{
 			res.render('watch', {video : foundVideo});
 
