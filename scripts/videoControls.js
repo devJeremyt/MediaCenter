@@ -1,5 +1,4 @@
 const vid = document.querySelector('#video');
-let pageTitle = document.title;
 let currentTime = vid.currentTime;
 
 window.addEventListener('keydown', event =>{
@@ -18,13 +17,15 @@ vid.addEventListener('ended', ()=>{
     const nextURL = window.location.pathname.replace('watch', 'next')
     http.open("GET", nextURL);
     http.send()
+    console.log(window.location);
     
     http.onreadystatechange =(e) =>{
         nextVideo = JSON.parse(http.responseText);
         vid.src = nextVideo.absPath;
-        let url = "/watch/" + nextVideo._id + "?playmethod=beginning";
-        window.history.pushState(null,nextVideo.title, url)
-        document.title = nextVideo.title;
+        console.log(nextVideo._id)
+        let url = `/watch/${nextVideo._id}`
+        window.location.pathname = url;
+        console.log(window.location);
     }
     
 });
@@ -37,8 +38,15 @@ function getPlayedTime(){
             'Content-Type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify({"currentTime": currentTime})
-    })
+    }).then(res => res.json())
+    .then(response => console.log('Success: ', response))
+    .then(error => console.error('Error: ', error));
 }
 
-//setInterval(getPlayedTime, 10000);
+// function getPlayedTime(){
+//     currentTime = vid.currentTime;
+//     console.log(currentTime);
+// }
+
+setInterval(getPlayedTime, 10000);
 

@@ -91,9 +91,8 @@ app.get('/next/:id', (req, res)=>{
 		currentVid = currentCat.vidList.filter(data => (data.id == foundVideo.id))[0];
 		currentIndex = currentCat.vidList.indexOf(currentVid);
 		nextVid = currentCat.vidList[currentIndex + 1];
-		console.log(nextVid)
 		if(nextVid != undefined){
-			// res.send(nextVid.absPath)
+			// res.send(nextVid.absPath) Originally used this to set video src
 			res.json(nextVid);
 		}else{
 			res.render('watch', {video : foundVideo});
@@ -108,10 +107,14 @@ app.put('/watch/:id', jsonParser, (req, res)=>{
 	Video.findByIdAndUpdate(req.params.id,{currentTime: req.body.currentTime}, (err, foundVideo)=>{
 		if(err){
 			console.log(err);
+			res.status(500);
 		}else{
 			console.log(req.body)
+			res.status(200).send();
 		}
 	})
+
+	
 });
 
 app.listen(process.env.PORT, ()=>{

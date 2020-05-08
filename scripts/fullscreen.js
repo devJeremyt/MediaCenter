@@ -7,9 +7,6 @@ const clickEvent = new MouseEvent('click', {
     cancelable: true
 });
 
-console.log(body)
-console.log(video);
-
 const listener = function(){body.addEventListener('click', ()=>{
     console.log('clicked')
     if(!document.mozFullScreenElement){

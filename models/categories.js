@@ -3,10 +3,8 @@ const catties = [];
 
 
 function populateCategories(videos){
-    console.log('PopulateCategories running');
     videos.forEach((video)=>{
         if(!catties.filter(data => (data.name == video.category)).length){
-            console.log('Creating Catergory ' + video.category); 
             var category = {
                 id: video.category.split(" ").join(''),
                 name:video.category,

@@ -4,16 +4,12 @@ const Video = require('../models/video');
 const path = require('path');
 const ffmpeg = require('fluent-ffmpeg')
 require('dotenv').config();
-console.log(process.env.VIDEOSPATH);
-console.log(process.env.MAINDIR);
 const mainVidDir = path.join(__dirname, '../Videos');
 
 
 
 
 function loadVideos(){
-    console.log('Loading Videos');
-    
     fs.readdir(mainVidDir, {withFileTypes : true}, (err, catDirs)=>{
         catDirs.forEach((catDir)=>{
             if(catDir.isDirectory()){
