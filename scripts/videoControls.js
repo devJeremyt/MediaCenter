@@ -22,10 +22,8 @@ vid.addEventListener('ended', ()=>{
     http.onreadystatechange =(e) =>{
         nextVideo = JSON.parse(http.responseText);
         vid.src = nextVideo.absPath;
-        console.log(nextVideo._id)
         let url = `/watch/${nextVideo._id}`
         window.location.pathname = url;
-        console.log(window.location);
     }
     
 });
