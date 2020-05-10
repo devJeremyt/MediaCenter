@@ -20,13 +20,11 @@
                 <% if(category.vidList[i] != undefined){ %>
                     <% let video = category.vidList[i]; %>
                     <div class="card">
-                        <a class="flex-centered" href="#">
+                        <div class="flex-centered">
+                            <a href='/watch/<%=video._id%>?playmethod=beginning' class="begin-btn play-method">Beginning</a>
                             <img class="responsize-resize" src="<%= video.thumbnail %>" alt="">
-                            <a class="play-method resumeBtn button" href="/watch/<%= video._id %>?playmethod=resume">
-                                Resume
-                            </a>
-                            <a class=" button play-method beginBtn" href="/watch/<%= video._id %>?playmethod=beginning">Beginning</a>
-                        </a>
+                            <a href='/watch/<%=video._id%>?playmethod=resume' class="play-method resume-btn">Resume</a>
+                        </div>
                         <h4 style="width: 225px;" class="flex-centered"><%=video.title%></h4>
                     </div>
                 <% } %> 

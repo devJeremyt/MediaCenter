@@ -43,10 +43,5 @@ function getPlayedTime(){
     .then(error => console.error('Error: ', error));
 }
 
-// function getPlayedTime(){
-//     currentTime = vid.currentTime;
-//     console.log(currentTime);
-// }
-
 setInterval(getPlayedTime, 10000);
 

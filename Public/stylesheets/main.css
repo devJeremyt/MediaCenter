@@ -53,6 +53,9 @@ body{
     justify-content: center;
 }
 
+.card img{
+    display: block;
+}
 .card {
     padding: 0;
     margin: 0;
@@ -61,36 +64,7 @@ body{
     position: relative;
 }
 
-.card:hover img{
-    width:300px;
-    height: 300px;
-}
 
-.card:hover .play-method{
-    display: inline-block;
-}
-
-.button.play-method{
-    display: none;
-    position: absolute;
-    border-radius: 10px;
-    border-color: #555555;
-    background-color:  #555555;
-    opacity: 0.75;
-    width: 100px;
-    height: 25px;
-}
-
-.resumeBtn{
-    top: 25%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-}
-.beginBtn{
-    top: 25%;
-    left: 75%;
-    transform: translate(-50%, -50%);
-}
 .video-selection {
     display: inline-flex;
     margin: auto 0;
@@ -116,28 +90,24 @@ body{
     height: 10em;
 }
 
-.button {
-    -webkit-appearance: button;
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: buttontext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
+.resume-btn {
+    top: 90px;
+}
+.play-method{
+    opacity: 0;
+    background-color: #434547;
+    position: absolute;
+    right: 0;
+    left: 0;
     text-align: center;
-    align-items: flex-start;
-    cursor: default;
-    background-color: buttonface;
-    box-sizing: border-box;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonface;
-    border-image: initial;
+    height: 88px;
+    z-index: 1000;
+    padding-top: 25px;
+    font-size: xx-large;
+    color: cornsilk;
     text-decoration: none;
+}
+
+.play-method:hover{
+    opacity: .75;
 }
