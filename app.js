@@ -91,8 +91,7 @@ app.get('/next/:id', (req, res)=>{
 		if(nextVid != undefined){
 			res.json(nextVid);
 		}else{
-			res.render('watch', {video : foundVideo});
-
+			res.render('watch', {video : foundVideo, playmethod:'beginning'});
 		}
 		
 	});
