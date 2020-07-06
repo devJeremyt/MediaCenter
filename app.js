@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const fs = require('fs');
 const mongoose = require('mongoose');
-const seedDB = require('./seed');
 const Video = require('./models/video');
 const loadVideos = require('./scripts/loadVideos');
 const categories = require('./models/categories');
@@ -12,19 +10,23 @@ const jsonParser = bodyParser.json();
 
 //App setup
 app.use(express.static('Public'));
-app.use(express.static(__dirname + '/Videos'));
+app.use(express.static(__dirname + '/Videos')); //Location doesn't exist unless user manually creates folder
 app.use(express.static(__dirname + '/scripts'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 
 //Loads local environment variables
 require('dotenv').config();
-//Setups Database
+
+//Sets up Database
 var dburl = process.env.DATABASEURL;
 mongoose.connect(dburl || "mongodb://localhost:27017/MediaCenter", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
-//Link Video directory
-var vidDir = process.env.MAINDIR + process.env.VIDEOSPATH;
+//Link Video and thumbnail directories
+var vidDir = process.env.BASEDIR + process.env.VIDEOSPATH;
+var photoDir = process.env.BASEDIR + process.env.PHOTOSPATH;
+app.use(express.static(vidDir));
+app.use(express.static(photoDir));
 
 
 
