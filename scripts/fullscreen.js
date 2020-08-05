@@ -1,14 +1,7 @@
 let body = document.querySelector('html');
 let video = document.querySelector('#video');
 
-const clickEvent = new MouseEvent('click', {
-    view:window,
-    bubbles: true,
-    cancelable: true
-});
-
 const listener = function(){body.addEventListener('click', ()=>{
-    console.log('clicked')
     if(!document.mozFullScreenElement){
         video.requestFullscreen();
     } else if(!document.webkitFullscreenElement){
@@ -16,8 +9,28 @@ const listener = function(){body.addEventListener('click', ()=>{
     }
 });
 }
+
+video.addEventListener( "loadedmetadata", ()=>{
+    let vidheight = video.videoHeight;
+    let vidwidth = video.videoWidth;
+
+    let winheight = window.innerHeight;
+    let winwidth = window.innerWidth;
+
+    let vidratio = vidheight / vidwidth;
+    let winratio = winheight / winwidth;
+    
+    if(vidratio < winratio){
+        video.style.height = "auto"
+        video.style.width = winwidth.toString() + "px";
+    } else{
+        video.style.height = winheight.toString() + "px";
+        video.style.width = "auto";
+    }
+})
+
+
 listener()
-window.onload = body.dispatchEvent(clickEvent);
 
 
 
