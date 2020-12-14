@@ -1,3 +1,4 @@
 .env
 /Videos
 /Public/photos
+node_modules

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const Video = require('./models/video');
 const loadVideos = require('./scripts/loadVideos');
 const categories = require('./models/categories');
@@ -15,8 +16,11 @@ app.use(express.static(__dirname + '/scripts'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 
+
 //Loads local environment variables
 require('dotenv').config();
+
+app.use(cors());
 
 //Sets up Database
 var dburl = process.env.DATABASEURL;
@@ -48,6 +52,10 @@ Video.find({}, function(err, videos){
 app.get('/', (req,res)=>{
 	res.render('index', {categories : cats});
 });
+
+app.get('/categories',(req, res)=>{
+	res.json(cats);
+})
 
 //Manually adds a new video
 app.post('/', (req, res)=>{

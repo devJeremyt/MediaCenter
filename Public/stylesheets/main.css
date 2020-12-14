@@ -109,3 +109,6 @@ body{
 .play-method:hover{
     opacity: .75;
 }
+#video-title{
+    width: 225px;
+}

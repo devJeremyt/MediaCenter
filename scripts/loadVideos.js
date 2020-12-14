@@ -14,21 +14,25 @@ const mainPhotoDir = baseDir + process.env.PHOTOSPATH || "/photos";
 
 function loadVideos(){
     fs.readdir(mainVidDir, {withFileTypes : true}, (err, catDirs)=>{
-        catDirs.forEach((catDir)=>{
-            if(catDir.isDirectory()){
-                let category = catDir.name;
-                fs.readdir(mainVidDir + '/' + catDir.name, (err, vidFiles)=>{
-                    vidFiles.forEach((vidFile)=>{
-                      let absPath = "/" + catDir.name + "/" + vidFile;
-                      addNewVideos(absPath, vidFile, category);
+        try {
+            catDirs.forEach((catDir)=>{
+                if(catDir.isDirectory()){
+                    let category = catDir.name;
+                    fs.readdir(mainVidDir + '/' + catDir.name, (err, vidFiles)=>{
+                        vidFiles.forEach((vidFile)=>{
+                          let absPath = "/" + catDir.name + "/" + vidFile;
+                          addNewVideos(absPath, vidFile, category);
+                        });
                     });
-                });
-            } else{
-                let absPath = "/" + catDir.name;
-                let category = "misc"
-                addNewVideos(absPath, vidFile, category);
-            }
-        });
+                } else{
+                    let absPath = "/" + catDir.name;
+                    let category = "misc"
+                    addNewVideos(absPath, vidFile, category);
+                }
+            });
+        } catch (error) {
+            console.log(error)
+        }
     });
     
 
