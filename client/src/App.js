@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3001/categories',{
+    fetch('/categories',{
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'

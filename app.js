@@ -10,7 +10,7 @@ var cats = [];
 const jsonParser = bodyParser.json();
 
 //App setup
-app.use(express.static('Public'));
+app.use(express.static('client/build'));
 app.use(express.static(__dirname + '/Videos')); //Location doesn't exist unless user manually creates folder
 app.use(express.static(__dirname + '/scripts'));
 app.set('view engine', 'ejs');
