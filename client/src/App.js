@@ -33,7 +33,10 @@ class App extends React.Component {
         this.state.categories.forEach(category=>{
           categories.push(
                 <div>
-                  <h4>{category.name}</h4>
+                  <h4 style={{
+                    textAlign: "left",
+                    scrollPaddingLeft: '10px'
+                    }}>{category.name}</h4>
                   <Category videos={category.vidList}/>
                 </div> 
           )
@@ -41,6 +44,7 @@ class App extends React.Component {
 
         return (
           <div className="App">
+            <h1>Welcome to the Trimble Family Media Center</h1>
             <div>{categories}</div>
           </div>
         );
