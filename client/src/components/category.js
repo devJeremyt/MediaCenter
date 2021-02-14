@@ -29,14 +29,14 @@ class Category extends React.Component{
     moveBackward(){
         let nextStartIndex = this.state.startIndex - 1;
         let nextEndIndex = nextStartIndex + (window.innerWidth / 255);
-        if(nextStartIndex > 0){
+        if(nextStartIndex >= 0){
             this.setState({
                 startIndex: nextStartIndex,
                 viewableVideos: this.props.videos.slice(nextStartIndex, nextEndIndex),
     
             })
         }
-        console.log(this.state.startIndex);
+        console.log('Logged ' + nextStartIndex);
     }
     
     moveForward(){
@@ -57,7 +57,7 @@ class Category extends React.Component{
             <div>
                 <h4>{this.props.name}</h4>
                 <div class='row' id={this.props._id}>
-                    <span class="left handle" id="backButton" onClick= {()=> this.moveBackward(this.props._id)}>‹</span>
+                    <span class="left handle" id="backButton" onClick= {()=> this.moveBackward()}>‹</span>
                     <VideoSelection videos={this.state.viewableVideos}/>
                     <span class="right handle" id="forward-button" onClick= {()=> this.moveForward()}>›</span>
                 </div>  
