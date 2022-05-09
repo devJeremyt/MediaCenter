@@ -70,6 +70,7 @@ app.post('/', (req, res)=>{
 //Opens Player for the selected video
 app.get('/watch/:id?', (req,res)=>{
 	Video.findById(req.params.id, (err, foundVideo)=>{
+		console.log(foundVideo);
 		if(req.query.playmethod == "resume"){
 			res.render('watch', {video : foundVideo, playmethod: 'resume'});
 		} else{
