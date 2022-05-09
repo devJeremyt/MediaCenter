@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Video = require('./models/video');
 const loadVideos = require('./scripts/loadVideos');
 const categories = require('./models/categories');
+const cors = require('cors')
 var cats = [];
 const jsonParser = bodyParser.json();
 
@@ -14,6 +15,9 @@ app.use(express.static(__dirname + '/Videos')); //Location doesn't exist unless 
 app.use(express.static(__dirname + '/scripts'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(cors({
+	origin: '*'
+}))
 
 //Loads local environment variables
 require('dotenv').config();
@@ -48,6 +52,10 @@ Video.find({}, function(err, videos){
 app.get('/', (req,res)=>{
 	res.render('index', {categories : cats});
 });
+
+app.get('/categories',(req, res)=>{
+	res.json(JSON.stringify(cats));
+})
 
 //Manually adds a new video
 app.post('/', (req, res)=>{
