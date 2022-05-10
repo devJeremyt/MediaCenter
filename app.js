@@ -57,6 +57,7 @@ app.get('/categories',(req, res)=>{
 	res.json(JSON.stringify(cats));
 })
 
+
 //Manually adds a new video
 app.post('/', (req, res)=>{
 	let absPath = req.body. absPath;
